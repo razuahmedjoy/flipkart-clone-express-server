@@ -5,6 +5,7 @@ const Category = require('../models/category');
 
 const createCategoryList = (categories,parentId=null)=>{
     const categoryList = [];
+
     let category;
     if(parentId==null){
         category = categories.filter(cat=>cat.parentId==undefined)
@@ -58,6 +59,8 @@ exports.getCategories = (req,res) =>{
     Category.find()
     .exec((error,categories)=>{
         if(error) return res.status(400).json({error})
+        // console.log(categories.length);
+        // console.log(categories.map(cat=>cat.name))
         if(categories){
             const categoryList = createCategoryList(categories);
 
